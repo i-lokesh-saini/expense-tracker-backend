@@ -13,7 +13,7 @@ const app = express();
 
 // middleware to handle CORS issues
 app.use(cors({
-    origin: process.env.CLIENT_URL || '*',
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -34,6 +34,10 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // check if server is running
 app.get('/', (req, res) => {
     res.send('Expense Tracker API is running');
+});
+
+app.get('/health', (req, res) => {
+    res.send('Expense Tracker API is healthy');
 });
 
 const PORT = process.env.PORT;
